@@ -451,7 +451,6 @@ module.exports = class gdax extends Exchange {
             }
         }
         const status = this.parseOrderStatus (this.safeString (order, 'status'));
-        const price = this.safeFloat (order, 'price');
         const amount = this.safeFloat (order, 'size');
         const filled = this.safeFloat (order, 'filled_size');
         let remaining = undefined;
@@ -492,7 +491,7 @@ module.exports = class gdax extends Exchange {
             'symbol': symbol,
             'type': type,
             'side': side,
-            'price': price,
+            'price': amount === 0 ? undefined : cost/amount,
             'cost': cost,
             'amount': amount,
             'filled': filled,
